@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Restoran Punta — Prvić Luka</title>
+<meta name="description" content="Restoran Punta — jedan od najstarijih restorana na otoku Prviću, od 1979. Svježa riba na gradele i plodovi mora na terasi uz more, u Prvić Luci na otoku bez automobila." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌅</text></svg>" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+:root{
+  --bg:#FAFAF8;
+  --navy:#0A1A35;
+  --teal:#2A9D8F;
+  --teal-dark:#218377;
+  --amber:#F4A261;
+  --cream:#F0E9DC;
+  --text:#1A1A1A;
+  --muted:#5B6675;
+  --line:rgba(10,26,53,.12);
+  --font-display:'Space Grotesk', sans-serif;
+  --font-serif:'Cormorant Garamond', serif;
+  --font-body:'Inter', sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+section{position:relative}
+
+.wrap{width:min(1280px,92vw);margin:0 auto}
+.eyebrow{
+  font-family:var(--font-body);
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-size:11px;
+  font-weight:500;
+  color:var(--teal);
+}
+.serif-tag{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-weight:500;
+  color:var(--muted);
+}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.04;letter-spacing:-.02em;color:var(--navy)}
+.h-sec{font-size:clamp(38px,6vw,76px)}
+
+/* ---------- HEADER ---------- */
+.header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  padding:22px 0;
+  transition:background .45s var(--ease),padding .45s var(--ease),box-shadow .45s var(--ease);
+}
+.header.solid{
+  background:rgba(250,250,248,.9);
+  backdrop-filter:blur(14px);
+  padding:14px 0;
+  box-shadow:0 1px 0 var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:21px;
+  letter-spacing:-.01em;
+  color:#fff;
+  transition:color .45s var(--ease);
+  display:flex;align-items:center;gap:9px;
+}
+.brand .dot{color:var(--amber)}
+.header.solid .brand{color:var(--navy)}
+.nav-links{display:flex;align-items:center;gap:34px}
+.nav-links a{
+  font-size:13px;letter-spacing:.06em;font-weight:500;color:rgba(255,255,255,.92);
+  transition:color .3s,opacity .3s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--amber);transition:width .35s var(--ease);
+}
+.nav-links a:hover::after{width:100%}
+.header.solid .nav-links a{color:var(--navy)}
+.btn-cta{
+  font-family:var(--font-display);
+  font-weight:600;font-size:13px;letter-spacing:.04em;
+  background:var(--teal);color:#fff;
+  padding:12px 24px;border-radius:40px;
+  transition:background .3s,transform .3s,box-shadow .3s;
+  white-space:nowrap;border:none;cursor:pointer;
+  box-shadow:0 6px 20px rgba(42,157,143,.32);
+}
+.btn-cta:hover{background:var(--amber);transform:translateY(-2px);box-shadow:0 10px 26px rgba(244,162,97,.4)}
+.nav-links a.btn-cta::after{display:none}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:120}
+.burger span{width:26px;height:2px;background:#fff;transition:.35s var(--ease)}
+.header.solid .burger span{background:var(--navy)}
+.menu-open .burger span{background:var(--navy)}
+.menu-open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-open .burger span:nth-child(2){opacity:0}
+.menu-open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- HERO ---------- */
+.hero{height:100svh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end;color:#fff}
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;transition:opacity 1.6s ease;
+  transform:scale(1.04);
+  animation:kenburns 14s ease-out infinite alternate;
+}
+.hero-slide.active{opacity:1}
+@keyframes kenburns{from{transform:scale(1.04)}to{transform:scale(1.16)}}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,26,53,.28) 0%,rgba(10,26,53,.05) 38%,rgba(10,26,53,.45) 100%);
+}
+.hero-inner{position:relative;z-index:3;width:min(1280px,92vw);margin:0 auto;padding-bottom:9vh}
+.hero-eyebrow{color:#fff;opacity:.95;margin-bottom:22px}
+.hero h1{
+  color:#fff;
+  font-size:clamp(64px,13vw,184px);
+  font-weight:700;letter-spacing:-.035em;line-height:.92;
+  text-shadow:0 4px 40px rgba(10,26,53,.3);
+}
+.hero h1 .line{overflow:hidden;display:block}
+.hero h1 .line span{display:block;transform:translateY(110%)}
+.hero-sub{
+  margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  font-family:var(--font-serif);font-style:italic;font-size:clamp(21px,2.6vw,30px);color:#fff;opacity:0;
+}
+.hero-sub .pill{
+  font-family:var(--font-body);font-style:normal;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.5);border-radius:30px;padding:7px 16px;
+}
+.scroll-cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff;opacity:.85;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+}
+.scroll-cue .bar{width:1px;height:42px;background:rgba(255,255,255,.6);overflow:hidden;position:relative}
+.scroll-cue .bar::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--amber);animation:cue 2s var(--ease) infinite}
+@keyframes cue{0%{top:-100%}60%,100%{top:100%}}
+
+/* ---------- INTRO ---------- */
+.intro{padding:clamp(90px,14vw,170px) 0;text-align:center}
+.intro .wrap{max-width:920px}
+.intro p{
+  font-family:var(--font-serif);
+  font-size:clamp(27px,3.6vw,46px);
+  line-height:1.32;color:var(--navy);font-weight:500;
+}
+.intro p em{font-style:italic;color:var(--teal)}
+.intro .since{margin-top:30px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);font-weight:600;font-family:var(--font-body)}
+
+/* ---------- HIGHLIGHT CARDS ---------- */
+.section{padding:clamp(70px,11vw,140px) 0}
+.sec-head{margin-bottom:56px;max-width:680px}
+.sec-head .eyebrow{display:block;margin-bottom:16px}
+.sec-head p{color:var(--muted);margin-top:18px;font-size:18px}
+
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.hcard{
+  position:relative;border-radius:18px;overflow:hidden;min-height:440px;
+  display:flex;align-items:flex-end;color:#fff;isolation:isolate;
+}
+.hcard .img{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .9s var(--ease)}
+.hcard::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,26,53,0) 30%,rgba(10,26,53,.78) 100%)}
+.hcard:hover .img{transform:scale(1.08)}
+.hcard-body{padding:32px}
+.hcard h3{color:#fff;font-size:27px;margin-bottom:10px}
+.hcard p{font-size:15.5px;color:rgba(255,255,255,.86);line-height:1.55}
+.hcard .num{font-family:var(--font-serif);font-style:italic;font-size:20px;color:var(--amber);margin-bottom:14px;display:block}
+
+/* ---------- MENU PREVIEW ---------- */
+.menu-sec{background:var(--cream)}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:14px}
+.mcard{
+  background:var(--bg);border:1px solid var(--line);border-radius:16px;
+  padding:38px 36px;transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.mcard:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(10,26,53,.1)}
+.mcard .ico{font-size:30px;margin-bottom:18px}
+.mcard h3{font-size:25px;margin-bottom:8px}
+.mcard .lead{font-family:var(--font-serif);font-style:italic;color:var(--teal);font-size:19px;margin-bottom:18px}
+.mcard ul{list-style:none}
+.mcard li{
+  display:flex;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);
+  color:var(--text);font-size:16px;align-items:baseline;
+}
+.mcard li:last-child{border-bottom:none}
+.mcard li::before{content:'';flex:0 0 6px;width:6px;height:6px;border-radius:50%;background:var(--amber);transform:translateY(7px)}
+.mcard li span{color:var(--muted);font-size:14.5px;font-style:italic;font-family:var(--font-serif)}
+.menu-note{margin-top:34px;text-align:center;color:var(--muted);font-family:var(--font-serif);font-style:italic;font-size:19px}
+
+/* ---------- ISLAND ---------- */
+.island{overflow:hidden}
+.island-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,90px);align-items:center}
+.island-img{border-radius:20px;overflow:hidden;position:relative;aspect-ratio:4/5}
+.island-img img{width:100%;height:100%;object-fit:cover}
+.island-txt .eyebrow{display:block;margin-bottom:18px}
+.island-txt h2{margin-bottom:24px}
+.island-txt p{color:var(--muted);margin-bottom:20px;font-size:17px}
+.island-feats{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.feat{
+  display:flex;align-items:center;gap:10px;background:var(--cream);
+  border-radius:40px;padding:11px 20px;font-size:14px;font-weight:500;color:var(--navy);
+}
+.feat .e{font-size:18px}
+
+/* ---------- GALLERY ---------- */
+.gallery-sec{background:var(--navy);color:#fff;padding:clamp(70px,11vw,130px) 0;overflow:hidden}
+.gallery-sec .eyebrow{color:var(--amber)}
+.gallery-sec h2{color:#fff}
+.gallery-sec .sec-head p{color:rgba(255,255,255,.72)}
+.swiper{overflow:visible;padding-bottom:8px}
+.gallery-sec .swiper{margin-top:18px}
+.gslide{width:min(520px,80vw);aspect-ratio:3/2;border-radius:16px;overflow:hidden;position:relative}
+.gslide img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.gslide:hover img{transform:scale(1.06)}
+.gslide .cap{position:absolute;left:18px;bottom:16px;font-family:var(--font-serif);font-style:italic;font-size:18px;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.swiper-grab{cursor:grab}
+.drag-hint{margin-top:30px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:12px}
+.drag-hint .arr{width:46px;height:1px;background:rgba(255,255,255,.4);position:relative}
+.drag-hint .arr::after{content:'→';position:absolute;right:-4px;top:-11px}
+
+/* ---------- CONTACT ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px)}
+.contact-info h2{margin-bottom:22px}
+.contact-info p{color:var(--muted);margin-bottom:26px;max-width:440px}
+.contact-line{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line)}
+.contact-line .e{font-size:20px}
+.contact-line b{font-family:var(--font-display);font-weight:600;color:var(--navy);display:block;font-size:15px}
+.contact-line span{color:var(--muted);font-size:15px}
+.fb-link{
+  display:inline-flex;align-items:center;gap:10px;margin-top:26px;
+  background:var(--navy);color:#fff;padding:13px 24px;border-radius:40px;
+  font-weight:600;font-size:14px;font-family:var(--font-display);transition:transform .3s,background .3s;
+}
+.fb-link:hover{background:var(--teal);transform:translateY(-2px)}
+
+.form{background:var(--cream);border-radius:20px;padding:clamp(30px,4vw,46px)}
+.form h3{font-size:25px;margin-bottom:6px}
+.form .sub{font-family:var(--font-serif);font-style:italic;color:var(--muted);margin-bottom:28px}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);font-weight:600;margin-bottom:9px}
+.field input,.field textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line);border-radius:11px;
+  padding:14px 16px;font-family:var(--font-body);font-size:16px;color:var(--text);
+  transition:border-color .3s,box-shadow .3s;
+}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(42,157,143,.12)}
+.field textarea{resize:vertical;min-height:118px}
+.form button{width:100%;border:none;cursor:pointer;font-size:15px;padding:15px;border-radius:11px}
+.form-msg{margin-top:16px;font-size:14px;color:var(--teal);font-weight:500;display:none}
+.form-msg.show{display:block}
+
+/* ---------- MAP ---------- */
+.map-sec{padding-bottom:clamp(70px,11vw,130px)}
+.map-frame{border-radius:20px;overflow:hidden;border:1px solid var(--line);height:clamp(340px,46vw,520px);box-shadow:0 24px 60px rgba(10,26,53,.1)}
+.map-frame iframe{width:100%;height:100%;border:0;filter:saturate(1.05)}
+
+/* ---------- FOOTER ---------- */
+.footer{background:var(--navy);color:#fff;padding:70px 0 110px}
+.footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.footer-brand{font-family:var(--font-display);font-weight:700;font-size:26px}
+.footer-brand .dot{color:var(--amber)}
+.footer-tag{font-family:var(--font-serif);font-style:italic;color:rgba(255,255,255,.66);margin-top:10px;max-width:320px}
+.footer-nav{display:flex;flex-direction:column;gap:12px}
+.footer-nav a{color:rgba(255,255,255,.75);font-size:14px;transition:color .3s}
+.footer-nav a:hover{color:var(--amber)}
+.footer-col h4{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:18px;font-family:var(--font-body);font-weight:600}
+.footer-col p{color:rgba(255,255,255,.7);font-size:14px;line-height:1.7}
+.footer-bottom{margin-top:60px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:rgba(255,255,255,.5);font-size:13px}
+
+/* ---------- MOBILE CTA BAR ---------- */
+.cta-bar{
+  position:fixed;left:0;bottom:0;width:100%;z-index:90;
+  background:rgba(250,250,248,.94);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);padding:12px 16px;
+  display:none;gap:12px;align-items:center;justify-content:space-between;
+  transform:translateY(100%);transition:transform .4s var(--ease);
+}
+.cta-bar.show{transform:translateY(0)}
+.cta-bar .lbl{font-family:var(--font-display);font-weight:600;color:var(--navy);font-size:14px;line-height:1.2}
+.cta-bar .lbl small{display:block;font-weight:400;color:var(--muted);font-size:11px;font-family:var(--font-body)}
+.cta-bar .btn-cta{flex:0 0 auto}
+
+/* ---------- MOBILE MENU ---------- */
+.mobile-menu{
+  position:fixed;inset:0;z-index:110;background:var(--bg);
+  display:flex;flex-direction:column;justify-content:center;padding:0 8vw;gap:6px;
+  transform:translateY(-100%);transition:transform .55s var(--ease);
+}
+.menu-open .mobile-menu{transform:translateY(0)}
+.mobile-menu a{font-family:var(--font-display);font-weight:600;font-size:clamp(30px,8vw,46px);color:var(--navy);padding:10px 0;border-bottom:1px solid var(--line)}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu .mm-cta{color:var(--teal)}
+
+/* ---------- REVEAL ---------- */
+[data-reveal]{opacity:0;transform:translateY(34px)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:980px){
+  .cards3{grid-template-columns:1fr}
+  .hcard{min-height:340px}
+  .island-grid{grid-template-columns:1fr}
+  .island-img{aspect-ratio:16/11;order:-1}
+}
+@media(max-width:760px){
+  body{font-size:16px}
+  .nav-links{display:none}
+  .burger{display:flex}
+  .menu-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-top{gap:34px}
+  .cta-bar{display:flex}
+  .scroll-cue{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.001s!important}
+  .hero-slide{animation:none}
+  [data-reveal]{opacity:1;transform:none}
+  .hero h1 .line span{transform:none}
+  .hero-sub{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="wrap nav">
+    <a href="#top" class="brand">Punta<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="#ponuda">Ponuda</a>
+      <a href="#jelovnik">Jelovnik</a>
+      <a href="#otok">Otok Prvić</a>
+      <a href="#galerija">Galerija</a>
+      <a href="#kontakt" class="btn-cta">Posjetite nas</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Izbornik">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#ponuda">Ponuda</a>
+  <a href="#jelovnik">Jelovnik</a>
+  <a href="#otok">Otok Prvić</a>
+  <a href="#galerija">Galerija</a>
+  <a href="#kontakt" class="mm-cta">Posjetite nas →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active" style="background-image:url('https://loremflickr.com/1920/1280/island,sea,adriatic?lock=11')"></div>
+    <div class="hero-slide" style="background-image:url('https://loremflickr.com/1920/1280/adriatic,coast,sea?lock=22')"></div>
+    <div class="hero-slide" style="background-image:url('https://loremflickr.com/1920/1280/boat,harbor,croatia?lock=33')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow eyebrow">Restoran Punta · Prvić Luka</div>
+    <h1 id="heroTitle">
+      <span class="line"><span>Otok.</span></span>
+      <span class="line"><span>More.</span></span>
+      <span class="line"><span>Punta.</span></span>
+    </h1>
+    <div class="hero-sub" id="heroSub">
+      <span>Prvić Luka · od 1979.</span>
+      <span class="pill">Terasa uz more</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Istražite</span><span class="bar"></span></div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="wrap">
+    <p data-reveal>Restoran uz more na <em>otoku bez automobila</em> — tamo gdje brod pristaje, val zapljusne kamen, a riba s gradela miriše na ljeto.</p>
+    <div class="since" data-reveal>Prvić Luka · otok Prvić · od 1979.</div>
+  </div>
+</section>
+
+<!-- PONUDA / SEZONA -->
+<section class="section" id="ponuda">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Sezona · Ponuda</span>
+      <h2 class="h-sec">Ono što more donese</h2>
+      <p>Svaki dan drukčiji ulov, isti pogled. Kratak put od mreže do gradela, od terase do horizonta.</p>
+    </div>
+    <div class="cards3">
+      <article class="hcard" data-reveal>
+        <div class="img" style="background-image:url('https://loremflickr.com/900/1100/grilled,fish?lock=41')"></div>
+        <div class="hcard-body">
+          <span class="num">01</span>
+          <h3>Svježa riba dana</h3>
+          <p>Ono što ribari dovezu tog jutra — na gradele, s maslinovim uljem i blitvom. Pitajte za današnji ulov.</p>
+        </div>
+      </article>
+      <article class="hcard" data-reveal>
+        <div class="img" style="background-image:url('https://loremflickr.com/900/1100/seafood,shellfish?lock=42')"></div>
+        <div class="hcard-body">
+          <span class="num">02</span>
+          <h3>Plodovi mora</h3>
+          <p>Školjke, lignje, rakovi i sve što Jadran nudi — na buzaru, na žaru ili u domaćoj brujetu.</p>
+        </div>
+      </article>
+      <article class="hcard" data-reveal>
+        <div class="img" style="background-image:url('https://loremflickr.com/900/1100/sunset,sea?lock=43')"></div>
+        <div class="hcard-body">
+          <span class="num">03</span>
+          <h3>Pogled na more</h3>
+          <p>Stol na terasi tik iznad mora. Brodovi, zalazak sunca i mir otoka bez automobila uz vašu večeru.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- JELOVNIK -->
+<section class="section menu-sec" id="jelovnik">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Jelovnik</span>
+      <h2 class="h-sec">Dalmacija na tanjuru</h2>
+      <p>Klasici dalmatinske kuhinje, pripremljeni jednostavno i s poštovanjem prema namirnici.</p>
+    </div>
+    <div class="menu-grid">
+      <article class="mcard" data-reveal>
+        <div class="ico">🐟</div>
+        <h3>Riba na gradele</h3>
+        <div class="lead">S otvorenog žara, na dalmatinski</div>
+        <ul>
+          <li>Orada na gradele <span>blitva, krumpir</span></li>
+          <li>Brancin na žaru <span>maslinovo ulje, limun</span></li>
+          <li>Riba dana <span>prema jutarnjem ulovu</span></li>
+          <li>Lignje na žaru <span>komorač, češnjak</span></li>
+        </ul>
+      </article>
+      <article class="mcard" data-reveal>
+        <div class="ico">🦐</div>
+        <h3>Plodovi mora</h3>
+        <div class="lead">Iz Jadrana, na više načina</div>
+        <ul>
+          <li>Školjke na buzaru <span>bijelo vino, peršin</span></li>
+          <li>Crni rižoto <span>sipa, domaća priprema</span></li>
+          <li>Dalmatinska brujet <span>palenta</span></li>
+          <li>Pjat plodova mora <span>za dvoje</span></li>
+        </ul>
+      </article>
+      <article class="mcard" data-reveal>
+        <div class="ico">🥩</div>
+        <h3>Meso</h3>
+        <div class="lead">Za one koji nisu za ribu</div>
+        <ul>
+          <li>Pašticada <span>domaći njoki</span></li>
+          <li>Janjetina ispod peke <span>na najavu</span></li>
+          <li>Biftek na žaru <span>sezonski prilozi</span></li>
+          <li>Dalmatinski gulaš <span>palenta</span></li>
+        </ul>
+      </article>
+      <article class="mcard" data-reveal>
+        <div class="ico">🍷</div>
+        <h3>Uz to</h3>
+        <div class="lead">Domaće i lokalno</div>
+        <ul>
+          <li>Dalmatinski pršut i sir <span>za početak</span></li>
+          <li>Sezonska salata <span>iz vrta</span></li>
+          <li>Domaća vina <span>otok i zaleđe</span></li>
+          <li>Rožata <span>domaći desert</span></li>
+        </ul>
+      </article>
+    </div>
+    <p class="menu-note" data-reveal>Jelovnik se mijenja prema sezoni i dnevnom ulovu. Za današnju ponudu — pitajte osoblje.</p>
+  </div>
+</section>
+
+<!-- OTOK PRVIĆ -->
+<section class="section island" id="otok">
+  <div class="wrap island-grid">
+    <div class="island-img" data-reveal>
+      <img src="https://loremflickr.com/1000/1250/island,sea,village?lock=51" alt="Prvić Luka, otok Prvić" loading="lazy" />
+    </div>
+    <div class="island-txt">
+      <span class="eyebrow" data-reveal>Otok Prvić</span>
+      <h2 class="h-sec" data-reveal>Otok bez<br>automobila</h2>
+      <p data-reveal>Prvić leži nasuprot Vodicama i Šibeniku — mali dalmatinski otok do kojeg se stiže samo brodom. Bez automobila, bez buke. Samo kamene uličice, polja i more sa svih strana.</p>
+      <p data-reveal>Restoran Punta jedan je od najstarijih na otoku. Od 1979. dočekujemo goste na terasi u Prvić Luci — putnike s broda, jedriličare i sve koji traže miran kutak Dalmacije.</p>
+      <div class="island-feats">
+        <span class="feat" data-reveal><span class="e">⛴️</span> Trajekt iz Vodica i Šibenika</span>
+        <span class="feat" data-reveal><span class="e">🚫</span> Otok bez automobila</span>
+        <span class="feat" data-reveal><span class="e">🌊</span> Terasa uz more</span>
+        <span class="feat" data-reveal><span class="e">🕰️</span> Od 1979.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIJA -->
+<section class="gallery-sec" id="galerija">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Galerija</span>
+      <h2 class="h-sec">Trenuci s Punte</h2>
+      <p>Otok, more, terasa i tanjuri. Povucite za više.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="swiper swiper-grab" id="gallery">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide gslide"><img src="https://loremflickr.com/800/540/adriatic,coast?lock=61" alt="Jadranska obala" loading="lazy" /><span class="cap">Pogled s terase</span></div>
+        <div class="swiper-slide gslide"><img src="https://loremflickr.com/800/540/grilled,fish?lock=62" alt="Riba na gradele" loading="lazy" /><span class="cap">Riba na gradele</span></div>
+        <div class="swiper-slide gslide"><img src="https://loremflickr.com/800/540/boat,harbor?lock=63" alt="Luka i brodovi" loading="lazy" /><span class="cap">Prvić Luka</span></div>
+        <div class="swiper-slide gslide"><img src="https://loremflickr.com/800/540/seafood?lock=64" alt="Plodovi mora" loading="lazy" /><span class="cap">Plodovi mora</span></div>
+        <div class="swiper-slide gslide"><img src="https://loremflickr.com/800/540/sunset,sea?lock=65" alt="Zalazak nad morem" loading="lazy" /><span class="cap">Zalazak nad morem</span></div>
+        <div class="swiper-slide gslide"><img src="https://loremflickr.com/800/540/island,village?lock=66" alt="Otok Prvić" loading="lazy" /><span class="cap">Kamene uličice</span></div>
+      </div>
+    </div>
+    <div class="drag-hint" data-reveal>Povucite <span class="arr"></span></div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="section" id="kontakt">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <span class="eyebrow" data-reveal>Posjetite nas</span>
+      <h2 class="h-sec" data-reveal style="margin-top:14px">Vidimo se<br>na terasi</h2>
+      <p data-reveal>Nemamo telefon ni rezervacijski sustav — javite nam se porukom ili putem Facebooka i rado ćemo odgovoriti.</p>
+      <div data-reveal>
+        <div class="contact-line"><span class="e">📍</span><div><b>Lokacija</b><span>Prvić Luka, otok Prvić, Dalmacija</span></div></div>
+        <div class="contact-line"><span class="e">⛴️</span><div><b>Dolazak</b><span>Trajektom iz Vodica ili Šibenika</span></div></div>
+        <div class="contact-line"><span class="e">🌅</span><div><b>Sezona</b><span>Otvoreno tijekom ljetne sezone</span></div></div>
+      </div>
+      <a class="fb-link" href="https://www.facebook.com/" target="_blank" rel="noopener" data-reveal>
+        <span>📘</span> Restoran Punta Prvić Luka
+      </a>
+    </div>
+
+    <form class="form" id="contactForm" data-reveal>
+      <h3>Pošaljite nam poruku</h3>
+      <p class="sub">Upit, termin ili samo pozdrav — pišite nam.</p>
+      <div class="field">
+        <label for="ime">Ime</label>
+        <input type="text" id="ime" name="ime" placeholder="Vaše ime" required />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="vas@email.com" required />
+      </div>
+      <div class="field">
+        <label for="poruka">Poruka</label>
+        <textarea id="poruka" name="poruka" placeholder="Koliko vas dolazi i kada? Imate li pitanje?" required></textarea>
+      </div>
+      <button type="submit" class="btn-cta">Pošalji poruku</button>
+      <p class="form-msg" id="formMsg">Hvala! Vaša poruka je spremna — javit ćemo se uskoro.</p>
+    </form>
+  </div>
+</section>
+
+<!-- LOKACIJA / MAPA -->
+<section class="map-sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Lokacija</span>
+      <h2 class="h-sec">Prvić Luka</h2>
+    </div>
+    <div class="map-frame" data-reveal>
+      <iframe
+        title="Restoran Punta Prvić Luka"
+        src="https://www.google.com/maps?q=Restoran+Punta+Prvi%C4%87+Luka&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Restoran Punta<span class="dot">.</span></div>
+        <p class="footer-tag">Jedan od najstarijih restorana na otoku Prviću. Od 1979., uz more.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Stranice</h4>
+        <nav class="footer-nav">
+          <a href="#ponuda">Ponuda</a>
+          <a href="#jelovnik">Jelovnik</a>
+          <a href="#otok">Otok Prvić</a>
+          <a href="#galerija">Galerija</a>
+          <a href="#kontakt">Posjetite nas</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h4>Pronađite nas</h4>
+        <p>
+          Prvić Luka<br>
+          otok Prvić, Dalmacija<br>
+          Trajekt iz Vodica / Šibenika<br>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" style="color:var(--amber)">Facebook: Restoran Punta Prvić Luka</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> Restoran Punta · Prvić Luka</span>
+      <span>Otok. More. Punta.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE CTA BAR -->
+<div class="cta-bar" id="ctaBar">
+  <div class="lbl">Restoran Punta<small>Prvić Luka · od 1979.</small></div>
+  <a href="#kontakt" class="btn-cta">Posjetite nas</a>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- HERO SLIDESHOW (Ken Burns crossfade) ---------- */
+(function(){
+  const slides = document.querySelectorAll('#heroSlides .hero-slide');
+  if(slides.length < 2 || reduce) return;
+  let i = 0;
+  setInterval(()=>{
+    slides[i].classList.remove('active');
+    i = (i+1) % slides.length;
+    slides[i].classList.add('active');
+  }, 5000);
+})();
+
+/* ---------- HEADER + CTA BAR ---------- */
+const header = document.getElementById('header');
+const ctaBar = document.getElementById('ctaBar');
+function onScroll(){
+  const y = window.scrollY;
+  header.classList.toggle('solid', y > 100);
+  ctaBar.classList.toggle('show', y > 600);
+}
+onScroll();
+window.addEventListener('scroll', onScroll, {passive:true});
+
+/* ---------- MOBILE MENU ---------- */
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', ()=> document.body.classList.toggle('menu-open'));
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=> document.body.classList.remove('menu-open')));
+
+/* ---------- LENIS + GSAP ---------- */
+let lenis = null;
+if(!reduce && typeof Lenis !== 'undefined'){
+  lenis = new Lenis({ duration:1.2, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)), smoothWheel:true });
+  if(window.gsap){
+    gsap.ticker.add(t=> lenis.raf(t*1000));
+    gsap.ticker.lagSmoothing(0);
+    if(window.ScrollTrigger){ lenis.on('scroll', ScrollTrigger.update); }
+  }
+}
+/* Smooth anchor scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href');
+    if(id.length < 2) return;
+    const el = document.querySelector(id);
+    if(!el) return;
+    e.preventDefault();
+    if(lenis){ lenis.scrollTo(el, {offset:-70}); }
+    else{ el.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+/* ---------- HERO TITLE REVEAL ---------- */
+if(window.gsap && !reduce){
+  const tl = gsap.timeline({delay:.35});
+  tl.to('#heroTitle .line span', {y:'0%', duration:1.05, stagger:.12, ease:'power4.out'})
+    .to('#heroSub', {opacity:1, y:0, duration:.8, ease:'power2.out'}, '-=.5');
+} else {
+  document.querySelectorAll('#heroTitle .line span').forEach(s=>s.style.transform='none');
+  document.getElementById('heroSub').style.opacity = 1;
+}
+
+/* ---------- SCROLL REVEALS ---------- */
+if(window.gsap && window.ScrollTrigger && !reduce){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('[data-reveal]').forEach(el=>{
+    gsap.to(el, {
+      opacity:1, y:0, duration:.9, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 88%' }
+    });
+  });
+} else {
+  document.querySelectorAll('[data-reveal]').forEach(el=>{el.style.opacity=1;el.style.transform='none';});
+}
+
+/* ---------- SWIPER GALLERY (draggable) ---------- */
+if(typeof Swiper !== 'undefined'){
+  new Swiper('#gallery', {
+    slidesPerView:'auto',
+    spaceBetween:22,
+    grabCursor:true,
+    freeMode:{enabled:true, momentum:true, momentumRatio:.6},
+    mousewheel:{forceToAxis:true},
+  });
+}
+
+/* ---------- CONTACT FORM ---------- */
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formMsg').classList.add('show');
+  this.reset();
+});
+</script>
+</body>
+</html>
